@@ -26,4 +26,4 @@ O projeto possui linguagens e tecnologias administradas automaticamente pelo pro
 
 MIT
 
-**Free Software, Hell Yeah!**
+**Free Software, Hell Yeah! 🔥**
