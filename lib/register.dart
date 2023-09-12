@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'customer.dart';
+import 'schedule.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -33,8 +34,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _nameController,
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
+                  final nameRegex = RegExp(r'^[a-zA-Z\s]+$');
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o nome';
+                  } else if (!nameRegex.hasMatch(value)) {
+                    return 'Nome só aceita letras e espaços';
                   }
                   return null;
                 },
@@ -43,8 +47,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _phoneController,
                 decoration: InputDecoration(labelText: 'Celular'),
                 validator: (value) {
+                  final phoneRegex = RegExp(r'^\d{10,12}$');
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o número de celular';
+                  } else if (!phoneRegex.hasMatch(value)) {
+                    return 'Celular só aceita números e deve ter entre 10 e 12 dígitos';
                   }
                   return null;
                 },
@@ -63,8 +70,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _emailController,
                 decoration: InputDecoration(labelText: 'Email'),
                 validator: (value) {
+                  final emailRegex =
+                      RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o email';
+                  } else if (!emailRegex.hasMatch(value)) {
+                    return 'Email não está no formato correto';
                   }
                   return null;
                 },
@@ -73,17 +84,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Criar um objeto Customer com os dados do formulário
-                    final customer = Customer(
-                      name: _nameController.text,
-                      phone: _phoneController.text,
-                      address: _addressController.text,
-                      email: _emailController.text,
-                    );
+                    // Formulário válido, faça o que for necessário aqui
+                    // Por exemplo, envie os dados para um servidor
 
-                    // fazer algo com as informações (enviar para um banco de dados?)
-                    // adicionar código aqui para lidar com o registro do cliente
-
+                    // Limpar os campos após o registro
                     _nameController.clear();
                     _phoneController.clear();
                     _addressController.clear();
@@ -94,6 +98,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         content: Text('Cliente registrado com sucesso!'),
                       ),
                     );
+
+                    // Navegar para a próxima tela (SchedulePage, no exemplo)
+                    // Substitua pelo código apropriado de navegação.
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SchedulePage(),
+                    ));
                   }
                 },
                 child: Text('Registrar'),

@@ -7,7 +7,6 @@ import 'package:dispmoveis/employees.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
 
@@ -85,29 +84,6 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // register
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RegisterPage(),
-                    ));
-                  },
-                  child: Column(
-                    children: [
-                      Emoticon(
-                        emoticon: '📝',
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Cadastrar cliente',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-
                 // schedule
                 GestureDetector(
                   onTap: () {
@@ -179,33 +155,78 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-
             SizedBox(
               height: 70,
             ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.grey[200],
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25.0),
                     topRight: Radius.circular(25.0),
                   ),
                 ),
                 width: double.infinity,
-                child: Center(
-                  child: Text(
-                    '',
-                    style: TextStyle(
-                      color: Colors.blue[700],
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Acesso rápido',
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.people,
+                              color: Colors.grey[700],
+                            ),
+                            SizedBox(
+                                width:
+                                    20), // Aumente o valor para adicionar mais espaço
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Lista de clientes',
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '0 clientes',
+                                  style: TextStyle(
+                                    color: Colors.grey[700],
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
-
           ],
         ),
       ),
