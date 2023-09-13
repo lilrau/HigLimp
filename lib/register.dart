@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'customer.dart';
 import 'schedule.dart';
 
+List<Customer> allCustomers = [];
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
@@ -84,10 +86,16 @@ class _RegisterPageState extends State<RegisterPage> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Formulário válido, faça o que for necessário aqui
-                    // Por exemplo, envie os dados para um servidor
+                    final newCustomer = Customer(
+                      name: _nameController.text,
+                      phone: _phoneController.text,
+                      address: _addressController.text,
+                      email: _emailController.text,
+                    );
 
-                    // Limpar os campos após o registro
+                    allCustomers
+                        .add(newCustomer); // Adicione o novo cliente à lista
+
                     _nameController.clear();
                     _phoneController.clear();
                     _addressController.clear();
@@ -99,8 +107,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     );
 
-                    // Navegar para a próxima tela (SchedulePage, no exemplo)
-                    // Substitua pelo código apropriado de navegação.
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SchedulePage(),
                     ));

@@ -6,6 +6,9 @@ import 'package:dispmoveis/schedule.dart';
 import 'package:dispmoveis/employees.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
+import 'customer.dart';
+import 'customers_list.dart';
+import 'register.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -196,28 +199,34 @@ class _HomePageState extends State<HomePage> {
                               Icons.people,
                               color: Colors.grey[700],
                             ),
-                            SizedBox(
-                                width:
-                                    20), // Aumente o valor para adicionar mais espaço
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Lista de clientes',
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                            SizedBox(width: 20),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => CustomersListPage(
+                                      customers: allCustomers),
+                                ));
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Lista de clientes',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '0 clientes',
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 14,
+                                  Text(
+                                    '${allCustomers.length} clientes',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 14,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
