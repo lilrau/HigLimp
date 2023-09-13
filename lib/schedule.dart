@@ -1,3 +1,4 @@
+import 'package:dispmoveis/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dispmoveis/register.dart';
 
@@ -16,6 +17,14 @@ class _SchedulePageState extends State<SchedulePage> {
       appBar: AppBar(
         title: Text('Novo pedido'),
         backgroundColor: Colors.blue[800],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ));
+          },
+        ),
       ),
       body: Center(
         child: Container(

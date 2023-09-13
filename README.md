@@ -13,6 +13,7 @@ O projeto consiste no desenvolvimento de um aplicativo mobile em Flutter. O tema
 ## Características Funcionais (Features)
 
 - Registrar novos clientes
+- Consultar lista de clientes
 - Agendar pedidos de serviços
 - Consultar um calendário com os serviços agendados
 - Consultar lista de funcionários
