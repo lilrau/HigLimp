@@ -26,7 +26,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Calendário'),
+        title: const Text('Calendário'),
         backgroundColor: Colors.blue[800],
       ),
       body: SafeArea(

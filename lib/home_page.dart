@@ -1,14 +1,12 @@
-import 'package:dispmoveis/emoticons.dart';
+import 'emoticons.dart';
 import 'package:flutter/material.dart';
-import 'package:dispmoveis/calendar.dart';
-import 'package:dispmoveis/register.dart';
-import 'package:dispmoveis/schedule.dart';
-import 'package:dispmoveis/employees.dart';
+import 'calendar.dart';
+import 'register.dart';
+import 'schedule.dart';
+import 'employees.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
-import 'customer.dart';
 import 'customers_list.dart';
-import 'register.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -23,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(minutes: 1), (Timer t) => updateDate());
+    Timer.periodic(const Duration(minutes: 1), (Timer t) => updateDate());
   }
 
   void updateDate() {
@@ -41,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(25.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -56,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
@@ -70,8 +68,8 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.blue[600],
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    padding: EdgeInsets.all(12),
-                    child: Icon(
+                    padding: const EdgeInsets.all(12),
+                    child: const Icon(
                       Icons.notifications,
                       color: Colors.white,
                     ),
@@ -79,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
 
@@ -91,10 +89,10 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SchedulePage(),
+                      builder: (context) => const SchedulePage(),
                     ));
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Emoticon(
                         emoticon: '📦',
@@ -114,10 +112,10 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CalendarPage(),
+                      builder: (context) => const CalendarPage(),
                     ));
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Emoticon(
                         emoticon: '🗓️',
@@ -137,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => EmployeesPage(),
+                      builder: (context) => const EmployeesPage(),
                     ));
                   },
-                  child: Column(
+                  child: const Column(
                     children: [
                       Emoticon(
                         emoticon: '🤵',
@@ -158,14 +156,14 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(25.0),
                     topRight: Radius.circular(25.0),
                   ),
@@ -185,10 +183,10 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -199,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                               Icons.people,
                               color: Colors.grey[700],
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(

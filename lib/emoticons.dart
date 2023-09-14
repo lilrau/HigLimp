@@ -16,10 +16,10 @@ class Emoticon extends StatelessWidget {
           color: Colors.blue[600],
           borderRadius: BorderRadius.circular(14)
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Center(child: Text(
           emoticon,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 30
             ),
         ),

@@ -13,7 +13,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Funcionários'),
+        title: const Text('Funcionários'),
         backgroundColor: Colors.blue[800],
       ),
     );

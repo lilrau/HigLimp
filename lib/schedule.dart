@@ -1,6 +1,6 @@
-import 'package:dispmoveis/home_page.dart';
+import 'home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:dispmoveis/register.dart';
+import 'register.dart';
 import 'new_order.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -16,13 +16,13 @@ class _SchedulePageState extends State<SchedulePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Novo pedido'),
+        title: const Text('Novo pedido'),
         backgroundColor: Colors.blue[800],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ));
           },
         ),
@@ -30,12 +30,12 @@ class _SchedulePageState extends State<SchedulePage> {
       body: Center(
         child: Container(
           color: Colors.blue,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
+              const Text(
                 '📦',
                 style: TextStyle(
                   color: Colors.white,
@@ -44,18 +44,18 @@ class _SchedulePageState extends State<SchedulePage> {
                 textAlign: TextAlign.center,
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Opção: Novo Cliente
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RegisterPage(),
+                    builder: (context) => const RegisterPage(),
                   ));
                 },
                 child: Container(
                   color: Colors.white,
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ListTile(
                     title: Text(
                       'Novo cliente',
@@ -72,18 +72,18 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Opção: Cliente já cadastrado
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NewOrderPage(),
+                    builder: (context) => const NewOrderPage(),
                   ));
                 },
                 child: Container(
                   color: Colors.white,
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ListTile(
                     title: Text(
                       'Cliente já cadastrado',

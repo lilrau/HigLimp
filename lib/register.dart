@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Cadastrar cliente'),
+        title: const Text('Cadastrar cliente'),
         backgroundColor: Colors.blue[800],
       ),
       body: Padding(
@@ -34,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Nome'),
+                decoration: const InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   final nameRegex = RegExp(r'^[a-zA-Z\s]+$');
                   if (value == null || value.isEmpty) {
@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(labelText: 'Celular'),
+                decoration: const InputDecoration(labelText: 'Celular'),
                 validator: (value) {
                   final phoneRegex = RegExp(r'^\d{10,12}$');
                   if (value == null || value.isEmpty) {
@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextFormField(
                 controller: _addressController,
-                decoration: InputDecoration(labelText: 'Endereço'),
+                decoration: const InputDecoration(labelText: 'Endereço'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira o endereço';
@@ -70,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   final emailRegex =
                       RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -102,17 +102,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     _emailController.clear();
 
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Cliente registrado com sucesso!'),
                       ),
                     );
 
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SchedulePage(),
+                      builder: (context) => const SchedulePage(),
                     ));
                   }
                 },
-                child: Text('Registrar'),
+                child: const Text('Registrar'),
               ),
             ],
           ),

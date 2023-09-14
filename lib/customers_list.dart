@@ -20,7 +20,7 @@ class _CustomersListPageState extends State<CustomersListPage> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Lista de clientes'),
+        title: const Text('Lista de clientes'),
         backgroundColor: Colors.blue[800],
       ),
       body: ListView.builder(
@@ -32,24 +32,24 @@ class _CustomersListPageState extends State<CustomersListPage> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(20.0),
             ),
-            margin: EdgeInsets.only(bottom: 16.0, top: 8.0),
-            padding: EdgeInsets.all(16.0),
+            margin: const EdgeInsets.only(bottom: 16.0, top: 8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   customer.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Text('Telefone: ${customer.phone}'),
                 Text('Endereço: ${customer.address}'),
                 Text('Email: ${customer.email}'),
-                SizedBox(height: 8.0),
-                Text(
+                const SizedBox(height: 8.0),
+                const Text(
                   'Pedidos:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -68,7 +68,7 @@ class _CustomersListPageState extends State<CustomersListPage> {
                         Text('Preço do Pedido: ${order.price}'),
                         Text(
                             'Data do Pedido: $formattedDate'), // Usar a data formatada aqui
-                        SizedBox(height: 8.0),
+                        const SizedBox(height: 8.0),
                       ],
                     );
                   }).toList(),

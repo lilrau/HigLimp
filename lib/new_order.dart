@@ -23,7 +23,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Pedido para cliente cadastrado'),
+        title: const Text('Pedido para cliente cadastrado'),
         backgroundColor: Colors.blue[800],
       ),
       body: Padding(
@@ -44,23 +44,23 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   child: Text(customer.name),
                 );
               }).toList(),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Selecione um cliente',
               ),
             ),
             if (selectedCustomer != null) ...[
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Nome do Pedido'),
+                decoration: const InputDecoration(labelText: 'Nome do Pedido'),
                 // Validação para o nome do pedido
               ),
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Preço do Pedido'),
+                decoration: const InputDecoration(labelText: 'Preço do Pedido'),
                 // Validação para o preço do pedido
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Data do Pedido'),
+                decoration: const InputDecoration(labelText: 'Data do Pedido'),
                 readOnly: true,
                 controller: _dateController,
                 onTap: () async {
@@ -107,24 +107,24 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     _priceController.clear();
 
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Pedido registrado com sucesso!'),
                       ),
                     );
                   }
                 },
-                child: Text('Registrar Pedido'),
+                child: const Text('Registrar Pedido'),
               ),
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
               if (selectedCustomer!.orders.isNotEmpty)
                 Text(
                   'Pedidos de ${selectedCustomer!.name}:',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
                   ),
                 ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: selectedCustomer!.orders.length,
@@ -137,7 +137,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                       Text('Preço do Pedido: ${order.price}'),
                       Text(
                           'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}'),
-                      SizedBox(height: 8.0),
+                      const SizedBox(height: 8.0),
                     ],
                   );
                 },
