@@ -29,96 +29,122 @@ class _NewOrderPageState extends State<NewOrderPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          child: Column(
-            children: [
-              DropdownButtonFormField<Customer>(
-                value: selectedCustomer,
-                onChanged: (customer) {
-                  setState(() {
-                    selectedCustomer = customer;
-                  });
-                },
-                items: allCustomers.map((customer) {
-                  return DropdownMenuItem<Customer>(
-                    value: customer,
-                    child: Text(customer.name),
-                  );
-                }).toList(),
-                decoration: InputDecoration(
-                  labelText: 'Selecione um cliente',
-                ),
+            child: Column(
+          children: [
+            DropdownButtonFormField<Customer>(
+              value: selectedCustomer,
+              onChanged: (customer) {
+                setState(() {
+                  selectedCustomer = customer;
+                });
+              },
+              items: allCustomers.map((customer) {
+                return DropdownMenuItem<Customer>(
+                  value: customer,
+                  child: Text(customer.name),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                labelText: 'Selecione um cliente',
               ),
-              if (selectedCustomer != null) ...[
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Nome do Pedido'),
-                  // alidação para o nome do pedido
-                ),
-                TextFormField(
-                  controller: _priceController,
-                  decoration: InputDecoration(labelText: 'Preço do Pedido'),
-                  // alidação para o preço do pedido
-                ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Data do Pedido'),
-                  readOnly: true,
-                  controller: _dateController,
-                  onTap: () async {
-                    final selectedDate = await showDatePicker(
+            ),
+            if (selectedCustomer != null) ...[
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(labelText: 'Nome do Pedido'),
+                // Validação para o nome do pedido
+              ),
+              TextFormField(
+                controller: _priceController,
+                decoration: InputDecoration(labelText: 'Preço do Pedido'),
+                // Validação para o preço do pedido
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Data do Pedido'),
+                readOnly: true,
+                controller: _dateController,
+                onTap: () async {
+                  final selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2101),
+                  );
+
+                  if (selectedDate != null) {
+                    final selectedTime = await showTimePicker(
                       context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101),
+                      initialTime: TimeOfDay.now(),
                     );
 
-                    if (selectedDate != null) {
-                      final selectedTime = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
+                    final selectedDateTime = DateTime(
+                      selectedDate.year,
+                      selectedDate.month,
+                      selectedDate.day,
+                      selectedTime!.hour,
+                      selectedTime.minute,
+                    );
 
-                      final selectedDateTime = DateTime(
-                        selectedDate.year,
-                        selectedDate.month,
-                        selectedDate.day,
-                        selectedTime!.hour,
-                        selectedTime.minute,
-                      );
+                    setState(() {
+                      _dateController.text = DateFormat('yyyy-MM-dd HH:mm')
+                          .format(selectedDateTime);
+                    });
+                  }
+                },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (selectedCustomer != null) {
+                    final newOrder = Order(
+                      name: _nameController.text,
+                      price: _priceController.text,
+                      date: DateTime.parse(_dateController.text),
+                    );
 
-                      setState(() {
-                        _dateController.text = DateFormat('yyyy-MM-dd HH:mm')
-                            .format(selectedDateTime);
-                      });
-                    }
-                  },
+                    selectedCustomer!.orders.add(newOrder);
+
+                    _nameController.clear();
+                    _priceController.clear();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Pedido registrado com sucesso!'),
+                      ),
+                    );
+                  }
+                },
+                child: Text('Registrar Pedido'),
+              ),
+              SizedBox(height: 50.0),
+              if (selectedCustomer!.orders.isNotEmpty)
+                Text(
+                  'Pedidos de ${selectedCustomer!.name}:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (selectedCustomer != null) {
-                      final newOrder = Order(
-                        name: _nameController.text,
-                        price: _priceController.text,
-                        date: DateTime.parse(_dateController.text),
-                      );
-
-                      selectedCustomer!.orders.add(newOrder);
-
-                      _nameController.clear();
-                      _priceController.clear();
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Pedido registrado com sucesso!'),
-                        ),
-                      );
-                    }
-                  },
-                  child: Text('Registrar Pedido'),
-                ),
-              ],
+              SizedBox(height: 20.0),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: selectedCustomer!.orders.length,
+                itemBuilder: (context, index) {
+                  final order = selectedCustomer!.orders[index];
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Nome do Pedido: ${order.name}'),
+                      Text('Preço do Pedido: ${order.price}'),
+                      Text(
+                          'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}'),
+                      SizedBox(height: 8.0),
+                    ],
+                  );
+                },
+              ),
             ],
-          ),
-        ),
+          ],
+        )),
       ),
     );
   }
