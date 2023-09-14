@@ -1,6 +1,7 @@
 import 'package:dispmoveis/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dispmoveis/register.dart';
+import 'new_order.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -76,7 +77,9 @@ class _SchedulePageState extends State<SchedulePage> {
               // Opção: Cliente já cadastrado
               GestureDetector(
                 onTap: () {
-                  // Implementar novo pedido
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NewOrderPage(),
+                  ));
                 },
                 child: Container(
                   color: Colors.white,

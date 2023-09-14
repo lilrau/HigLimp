@@ -5,7 +5,7 @@ class Customer {
   final String phone;
   final String address;
   final String email;
-  final List<Order> orders;
+  List<Order> orders = const [];
 
   Customer({
     required this.name,

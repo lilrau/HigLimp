@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
 import 'customer.dart';
+import 'package:intl/intl.dart';
 
 class CustomersListPage extends StatefulWidget {
   final List<Customer> customers;
@@ -48,6 +48,31 @@ class _CustomersListPageState extends State<CustomersListPage> {
                 Text('Telefone: ${customer.phone}'),
                 Text('Endereço: ${customer.address}'),
                 Text('Email: ${customer.email}'),
+                SizedBox(height: 8.0),
+                Text(
+                  'Pedidos:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: customer.orders.map((order) {
+                    final formattedDate =
+                        DateFormat('yyyy-MM-dd HH:mm').format(order.date);
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Nome do Pedido: ${order.name}'),
+                        Text('Preço do Pedido: ${order.price}'),
+                        Text(
+                            'Data do Pedido: $formattedDate'), // Usar a data formatada aqui
+                        SizedBox(height: 8.0),
+                      ],
+                    );
+                  }).toList(),
+                ),
               ],
             ),
           );

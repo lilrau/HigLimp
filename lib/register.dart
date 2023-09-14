@@ -91,10 +91,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         phone: _phoneController.text,
                         address: _addressController.text,
                         email: _emailController.text,
-                        orders: List.empty());
+                        orders: []);
 
                     allCustomers
-                        .add(newCustomer); // Adicione o novo cliente à lista
+                        .add(newCustomer);
 
                     _nameController.clear();
                     _phoneController.clear();
