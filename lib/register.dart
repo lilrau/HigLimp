@@ -87,11 +87,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     final newCustomer = Customer(
-                      name: _nameController.text,
-                      phone: _phoneController.text,
-                      address: _addressController.text,
-                      email: _emailController.text,
-                    );
+                        name: _nameController.text,
+                        phone: _phoneController.text,
+                        address: _addressController.text,
+                        email: _emailController.text,
+                        orders: List.empty());
 
                     allCustomers
                         .add(newCustomer); // Adicione o novo cliente à lista

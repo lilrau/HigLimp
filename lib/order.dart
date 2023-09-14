@@ -1,13 +1,11 @@
-import 'customer.dart';
-
 class Order {
   final String name;
   final String price;
-  final Customer customer;
+  final DateTime date;
 
   Order({
     required this.name,
     required this.price,
-    required this.customer,
+    required this.date,
   });
 }
