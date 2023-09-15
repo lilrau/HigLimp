@@ -113,6 +113,10 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     );
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      Colors.blue[800],
+                ),
                 child: const Text('Registrar Pedido'),
               ),
               const SizedBox(height: 50.0),
@@ -125,23 +129,53 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   ),
                 ),
               const SizedBox(height: 20.0),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: selectedCustomer!.orders.length,
-                itemBuilder: (context, index) {
-                  final order = selectedCustomer!.orders[index];
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Nome do Pedido: ${order.name}'),
-                      Text('Preço do Pedido: ${order.price}'),
-                      Text(
-                          'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}'),
-                      const SizedBox(height: 8.0),
-                    ],
-                  );
-                },
-              ),
+              Container(
+                color: Colors.white,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: selectedCustomer!.orders.length,
+                  itemBuilder: (context, index) {
+                    final order = selectedCustomer!.orders[index];
+                    return Container(
+                      margin: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[800],
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nome do Pedido: ${order.name}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Preço do Pedido: ${order.price}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           ],
         )),

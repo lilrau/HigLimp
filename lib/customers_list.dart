@@ -66,8 +66,9 @@ class _CustomersListPageState extends State<CustomersListPage> {
                       children: [
                         Text('Nome do Pedido: ${order.name}'),
                         Text('Preço do Pedido: ${order.price}'),
-                        Text(
-                            'Data do Pedido: $formattedDate'), // Usar a data formatada aqui
+                        Text('Data do Pedido: $formattedDate'),
+                        const Text(
+                            '----------------------------------------------------------'),
                         const SizedBox(height: 8.0),
                       ],
                     );

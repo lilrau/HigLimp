@@ -93,8 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         email: _emailController.text,
                         orders: []);
 
-                    allCustomers
-                        .add(newCustomer);
+                    allCustomers.add(newCustomer);
 
                     _nameController.clear();
                     _phoneController.clear();
@@ -112,6 +111,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ));
                   }
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[800],
+                ),
                 child: const Text('Registrar'),
               ),
             ],

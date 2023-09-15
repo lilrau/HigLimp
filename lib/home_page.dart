@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'calendar.dart';
 import 'register.dart';
 import 'schedule.dart';
-import 'employees.dart';
+import 'employees_list.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'customers_list.dart';
+import 'new_employee.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -183,6 +184,7 @@ class _HomePageState extends State<HomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      // Acesso rapido lista de clientes
                       const SizedBox(height: 20),
                       Container(
                         width: double.infinity,
@@ -218,6 +220,52 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Text(
                                     '${allCustomers.length} clientes',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Acesso rapido novo funcionario
+                      const SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.work,
+                              color: Colors.grey[700],
+                            ),
+                            const SizedBox(width: 20),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const NewEmployeesPage(),
+                                ));
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Adicionar funcionario',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${allEmployees.length} funcionarios',
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: 14,
