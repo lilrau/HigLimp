@@ -136,7 +136,8 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const EmployeesPage(),
+                      builder: (context) =>
+                          EmployeesListPage(employees: allEmployees),
                     ));
                   },
                   child: const Column(
@@ -250,7 +251,8 @@ class _HomePageState extends State<HomePage> {
                             GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const NewEmployeesPage(),
+                                  builder: (context) =>
+                                      const NewEmployeesPage(),
                                 ));
                               },
                               child: Column(

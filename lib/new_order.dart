@@ -1,10 +1,13 @@
+import 'package:dispmoveis/new_employee.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'customer.dart';
 import 'order.dart';
+import 'employee.dart';
 import 'package:intl/intl.dart';
 
 Customer? selectedCustomer;
+Employee? selectedEmployee;
 
 class NewOrderPage extends StatefulWidget {
   const NewOrderPage({super.key});
@@ -92,9 +95,26 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   }
                 },
               ),
+              DropdownButtonFormField<Employee>(
+                value: selectedEmployee,
+                onChanged: (employee) {
+                  setState(() {
+                    selectedEmployee = employee;
+                  });
+                },
+                items: allEmployees.map((employee) {
+                  return DropdownMenuItem<Employee>(
+                    value: employee,
+                    child: Text(employee.name),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Funcionário',
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
-                  if (selectedCustomer != null) {
+                  if (selectedCustomer != null && selectedEmployee != null) {
                     final newOrder = Order(
                       name: _nameController.text,
                       price: _priceController.text,
@@ -102,6 +122,8 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     );
 
                     selectedCustomer!.orders.add(newOrder);
+                    selectedEmployee!.orders.add(newOrder);
+                    selectedEmployee!.calculateValue();
 
                     _nameController.clear();
                     _priceController.clear();
@@ -114,8 +136,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.blue[800],
+                  backgroundColor: Colors.blue[800],
                 ),
                 child: const Text('Registrar Pedido'),
               ),

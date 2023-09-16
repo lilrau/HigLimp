@@ -65,7 +65,7 @@ class _CustomersListPageState extends State<CustomersListPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Nome do Pedido: ${order.name}'),
-                        Text('Preço do Pedido: ${order.price}'),
+                        Text('Preço do Pedido: R\$${order.price}'),
                         Text('Data do Pedido: $formattedDate'),
                         const Text(
                             '----------------------------------------------------------'),
