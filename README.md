@@ -2,7 +2,7 @@
 
 Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.
 
-![AppVeyor Build (with branch)](https://img.shields.io/appveyor/build/lilrau/HigLimp/main)
+![Build Status](https://img.shields.io/github/workflow/status/lilrau/HigLimp/CI/main?label=Build%20Status&style=flat-square)
 
 ## Alunos responsáveis pelo projeto
 
