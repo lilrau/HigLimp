@@ -55,12 +55,11 @@ class _NewOrderPageState extends State<NewOrderPage> {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Nome do Pedido'),
-                // Validação para o nome do pedido
               ),
               TextFormField(
                 controller: _priceController,
                 decoration: const InputDecoration(labelText: 'Preço do Pedido'),
-                // Validação para o preço do pedido
+                keyboardType: TextInputType.number,
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Data do Pedido'),
@@ -177,7 +176,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                           ),
                           const SizedBox(height: 8.0),
                           Text(
-                            'Preço do Pedido: ${order.price}',
+                            'Preço do Pedido: R\$${order.price}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14.0,

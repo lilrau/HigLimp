@@ -48,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
               TextFormField(
                 controller: _phoneController,
                 decoration: const InputDecoration(labelText: 'Celular'),
+                keyboardType: TextInputType.number,
                 validator: (value) {
                   final phoneRegex = RegExp(r'^\d{10,12}$');
                   if (value == null || value.isEmpty) {

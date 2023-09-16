@@ -2,6 +2,8 @@
 
 Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.
 
+![AppVeyor Build (with branch)](https://img.shields.io/appveyor/build/lilrau/HigLimp/main)
+
 ## Alunos responsáveis pelo projeto
 
 **Raul Souza Silva** e **Gabriel Mastre Costa**
@@ -12,16 +14,16 @@ O projeto consiste no desenvolvimento de um aplicativo mobile em Flutter. O tema
 
 ## Características Funcionais (Features)
 
-- Registrar novos clientes
-- Consultar lista de clientes
+- Registrar e consultar clientes
 - Agendar pedidos de serviços
 - Consultar um calendário com os serviços agendados
-- Consultar lista de funcionários
+- Administrar e consultar lista de funcionários
+- Calcular de forma automática a comissão de cada funcionário
 - ✨ Mágica ✨
 
 ## Tecnologias
 
-O projeto possui linguagens e tecnologias administradas automaticamente pelo projeto (C++, HTML, Swift), mas de fato trabalhado foram a linguagem Dart e o framework Flutter.
+O projeto possui linguagens e tecnologias administradas automaticamente pelo projeto (C++, HTML, Swift, etc), mas de fato trabalhado foram a linguagem Dart e o framework Flutter.
 
 ## Licença
 
