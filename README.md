@@ -2,8 +2,6 @@
 
 Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.
 
-![Build Status](https://img.shields.io/github/workflow/status/lilrau/HigLimp/CI/main?label=Build%20Status&style=flat-square)
-
 ## Alunos responsáveis pelo projeto
 
 **Raul Souza Silva** e **Gabriel Mastre Costa**
