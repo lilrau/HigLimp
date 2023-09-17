@@ -2,8 +2,6 @@
 
 Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.
 
-![AppVeyor Build (with branch)](https://img.shields.io/appveyor/build/lilrau/HigLimp/main)
-
 ## Alunos responsáveis pelo projeto
 
 **Raul Souza Silva** e **Gabriel Mastre Costa**
