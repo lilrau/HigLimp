@@ -1,4 +1,4 @@
-import 'package:dispmoveis/new_employee.dart';
+import 'new_employee.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'customer.dart';
@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 Customer? selectedCustomer;
 Employee? selectedEmployee;
+List<Order> allOrders = [];
 
 class NewOrderPage extends StatefulWidget {
   const NewOrderPage({super.key});
@@ -19,6 +20,7 @@ class NewOrderPage extends StatefulWidget {
 class _NewOrderPageState extends State<NewOrderPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
 
   @override
@@ -60,6 +62,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
                 controller: _priceController,
                 decoration: const InputDecoration(labelText: 'Preço do Pedido'),
                 keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: _detailsController,
+                decoration:
+                    const InputDecoration(labelText: 'Detalhes do Pedido'),
+                maxLines: null,
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Data do Pedido'),
@@ -117,12 +125,14 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     final newOrder = Order(
                       name: _nameController.text,
                       price: _priceController.text,
+                      details: _detailsController.text,
                       date: DateTime.parse(_dateController.text),
                     );
 
                     selectedCustomer!.orders.add(newOrder);
                     selectedEmployee!.orders.add(newOrder);
                     selectedEmployee!.calculateValue();
+                    allOrders.add(newOrder);
 
                     _nameController.clear();
                     _priceController.clear();
@@ -177,6 +187,14 @@ class _NewOrderPageState extends State<NewOrderPage> {
                           const SizedBox(height: 8.0),
                           Text(
                             'Preço do Pedido: R\$${order.price}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Detalhes do Pedido: \n${order.details}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14.0,

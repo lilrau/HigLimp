@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'new_order.dart';
+import 'order.dart';
+import 'orders_list_day.dart';
+import 'package:intl/intl.dart';
+
+Map<String, List<Order>> ordersByDate = {};
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key});
@@ -12,6 +18,7 @@ class _CalendarPageState extends State<CalendarPage> {
   late CalendarFormat _calendarFormat;
   late DateTime _focusedDay;
   late DateTime _selectedDay;
+  Map<String, List<Order>> ordersByDate = {};
 
   @override
   void initState() {
@@ -19,6 +26,52 @@ class _CalendarPageState extends State<CalendarPage> {
     _calendarFormat = CalendarFormat.month;
     _focusedDay = DateTime.now();
     _selectedDay = DateTime.now();
+    _createOrdersByDateMap();
+  }
+
+  void _createOrdersByDateMap() {
+    // Preencha o mapa com os pedidos
+    for (final order in allOrders) {
+      final dateKey = DateFormat('yyyy-MM-dd').format(order.date);
+      if (ordersByDate.containsKey(dateKey)) {
+        ordersByDate[dateKey]!.add(order);
+      } else {
+        ordersByDate[dateKey] = [order];
+      }
+    }
+  }
+
+  void _showOrdersForDay(BuildContext context) {
+    final dateKey = DateFormat('yyyy-MM-dd').format(_selectedDay);
+    final ordersForDay = ordersByDate[dateKey] ?? [];
+
+    if (ordersForDay.isNotEmpty) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => OrderListPage(ordersForDay),
+        ),
+      );
+    } else {
+      // Se não houver pedidos, você pode exibir uma mensagem ou fazer outra ação apropriada
+      // Por exemplo:
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Sem pedidos'),
+            content: Text('Não há pedidos para o dia selecionado.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -46,6 +99,11 @@ class _CalendarPageState extends State<CalendarPage> {
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
                 });
+                _showOrdersForDay(context);
+              },
+              eventLoader: (day) {
+                final dateKey = DateFormat('yyyy-MM-dd').format(day);
+                return ordersByDate[dateKey] ?? [];
               },
             ),
           ],

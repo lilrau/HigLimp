@@ -15,8 +15,6 @@ class _NewEmployeesPageState extends State<NewEmployeesPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

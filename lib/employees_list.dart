@@ -65,6 +65,7 @@ class _EmployeesListPageState extends State<EmployeesListPage> {
                       children: [
                         Text('Nome do Pedido: ${order.name}'),
                         Text('Preço do Pedido: R\$${order.price}'),
+                        Text('Detalhes do pedido: \n${order.details}'),
                         Text('Data do Pedido: $formattedDate'),
                         const Text(
                             '----------------------------------------------------------'),
