@@ -4,6 +4,7 @@ import 'register.dart';
 import 'customer.dart';
 import 'order.dart';
 import 'employee.dart';
+import 'home_page.dart';
 import 'package:intl/intl.dart';
 
 Customer? selectedCustomer;
@@ -122,26 +123,39 @@ class _NewOrderPageState extends State<NewOrderPage> {
               ElevatedButton(
                 onPressed: () {
                   if (selectedCustomer != null && selectedEmployee != null) {
-                    final newOrder = Order(
-                      name: _nameController.text,
-                      price: _priceController.text,
-                      details: _detailsController.text,
-                      date: DateTime.parse(_dateController.text),
-                    );
+                    if (_dateController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text('Por favor, preencha a data do pedido.'),
+                        ),
+                      );
+                    } else {
+                      final newOrder = Order(
+                        name: _nameController.text,
+                        price: _priceController.text,
+                        details: _detailsController.text,
+                        date: DateTime.parse(_dateController.text),
+                      );
 
-                    selectedCustomer!.orders.add(newOrder);
-                    selectedEmployee!.orders.add(newOrder);
-                    selectedEmployee!.calculateValue();
-                    allOrders.add(newOrder);
+                      selectedCustomer!.orders.add(newOrder);
+                      selectedEmployee!.orders.add(newOrder);
+                      selectedEmployee!.calculateValue();
+                      allOrders.add(newOrder);
 
-                    _nameController.clear();
-                    _priceController.clear();
+                      _nameController.clear();
+                      _priceController.clear();
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Pedido registrado com sucesso!'),
-                      ),
-                    );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Pedido registrado com sucesso!'),
+                        ),
+                      );
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ));
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(

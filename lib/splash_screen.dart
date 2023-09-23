@@ -33,9 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 3));
 
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
     );
   }
 
@@ -52,11 +52,11 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: _controller.value.isInitialized
             ? AspectRatio(
-          aspectRatio: _controller.value.aspectRatio,
-          child: VideoPlayer(
-            _controller,
-          ),
-        )
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(
+                  _controller,
+                ),
+              )
             : Container(),
       ),
     );

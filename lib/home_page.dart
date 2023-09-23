@@ -8,6 +8,8 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'customers_list.dart';
 import 'new_employee.dart';
+import 'confirm.dart';
+import 'new_order.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -268,6 +270,59 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   Text(
                                     '${allEmployees.length} funcionarios',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // acesso rapido pedidos
+                      const SizedBox(height: 20),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.create_rounded,
+                              color: Colors.grey[700],
+                            ),
+                            const SizedBox(width: 20),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const ConfirmPage(),
+                                ));
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Gerenciar pedidos',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Editar, confirmar ou excluir um pedido',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${allOrders.length} pedidos',
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: 14,

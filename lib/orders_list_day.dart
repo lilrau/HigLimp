@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class OrderListPage extends StatelessWidget {
   final List<Order> orders;
 
-  OrderListPage(this.orders);
+  const OrderListPage(this.orders);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class OrderListPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}',
+                  'Data do Pedido: ${DateFormat('yyyy/MM/dd HH:mm').format(order.date)}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14.0,

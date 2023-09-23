@@ -20,7 +20,7 @@ class _EmployeesListPageState extends State<EmployeesListPage> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text('Lista de clientes'),
+        title: const Text('Lista de funcionários'),
         backgroundColor: Colors.blue[800],
       ),
       body: ListView.builder(
@@ -59,7 +59,7 @@ class _EmployeesListPageState extends State<EmployeesListPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: employee.orders.map((order) {
                     final formattedDate =
-                        DateFormat('yyyy-MM-dd HH:mm').format(order.date);
+                        DateFormat('yyyy/MM/dd HH:mm').format(order.date);
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

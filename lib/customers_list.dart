@@ -60,7 +60,7 @@ class _CustomersListPageState extends State<CustomersListPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: customer.orders.map((order) {
                     final formattedDate =
-                        DateFormat('yyyy-MM-dd HH:mm').format(order.date);
+                        DateFormat('yyyy/MM/dd HH:mm').format(order.date);
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

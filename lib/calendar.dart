@@ -58,14 +58,14 @@ class _CalendarPageState extends State<CalendarPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Sem pedidos'),
-            content: Text('Não há pedidos para o dia selecionado.'),
+            title: const Text('Sem pedidos'),
+            content: const Text('Não há pedidos para o dia selecionado.'),
             actions: [
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
