@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'new_order.dart';
 import 'edit_order.dart';
 import 'order.dart';
+import 'register.dart';
+import 'new_employee.dart';
 
 List<Order> completedOrder = [];
 
@@ -65,13 +67,23 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       ),
                     ),
                     ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        final editedOrder = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => EditOrderPage(order: order),
                           ),
                         );
+
+                        if (editedOrder != null) {
+                          // Verifica se o pedido foi editado
+                          final orderIndex = allOrders.indexOf(order);
+                          if (orderIndex != -1) {
+                            // Atualiza a lista de pedidos com o pedido editado
+                            allOrders[orderIndex] = editedOrder;
+                            setState(() {});
+                          }
+                        }
                       },
                       icon:
                           const Icon(Icons.create_rounded, color: Colors.white),
@@ -84,7 +96,26 @@ class _ConfirmPageState extends State<ConfirmPage> {
                     ),
                     ElevatedButton.icon(
                       onPressed: () {
-                        // adicionar funcao apagar pedido
+                        order.deleteOrder();
+
+                        for (final customer in allCustomers) {
+                          customer.orders.remove(order);
+                        }
+
+                        for (final employee in allEmployees) {
+                          employee.orders.remove(order);
+                          employee.calculateValue();
+                        }
+
+                        allOrders.remove(order);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Pedido excluído com sucesso!'),
+                          ),
+                        );
+
+                        setState(() {});
                       },
                       icon:
                           const Icon(Icons.close_rounded, color: Colors.white),
