@@ -3,7 +3,8 @@ import 'order.dart';
 class Employee {
   final String name;
   final String phone;
-  List<Order> orders = const [];
+  List<Order> orders = [];
+  List<Order> completedOrders = [];
   double value = 0;
 
   Employee({
@@ -16,7 +17,7 @@ class Employee {
 
   void calculateValue() {
     double totalValue = 0;
-    for (var order in orders) {
+    for (var order in completedOrders) {
       final orderPrice = double.tryParse(order.price) ?? 0;
       totalValue += orderPrice;
     }

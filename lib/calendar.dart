@@ -29,8 +29,8 @@ class _CalendarPageState extends State<CalendarPage> {
     _createOrdersByDateMap();
   }
 
+  // Cria o mapa com os pedidos para serem exibidos no calendário
   void _createOrdersByDateMap() {
-    // Preencha o mapa com os pedidos
     for (final order in allOrders) {
       final dateKey = DateFormat('yyyy-MM-dd').format(order.date);
       if (ordersByDate.containsKey(dateKey)) {
@@ -52,8 +52,6 @@ class _CalendarPageState extends State<CalendarPage> {
         ),
       );
     } else {
-      // Se não houver pedidos, você pode exibir uma mensagem ou fazer outra ação apropriada
-      // Por exemplo:
       showDialog(
         context: context,
         builder: (context) {

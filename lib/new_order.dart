@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 Customer? selectedCustomer;
 Employee? selectedEmployee;
 List<Order> allOrders = [];
+List<Order> waitingOrders = [];
 
 class NewOrderPage extends StatefulWidget {
   const NewOrderPage({super.key});
@@ -32,205 +33,213 @@ class _NewOrderPageState extends State<NewOrderPage> {
         title: const Text('Pedido para cliente cadastrado'),
         backgroundColor: Colors.blue[800],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
             child: Column(
-          children: [
-            DropdownButtonFormField<Customer>(
-              value: selectedCustomer,
-              onChanged: (customer) {
-                setState(() {
-                  selectedCustomer = customer;
-                });
-              },
-              items: allCustomers.map((customer) {
-                return DropdownMenuItem<Customer>(
-                  value: customer,
-                  child: Text(customer.name),
-                );
-              }).toList(),
-              decoration: const InputDecoration(
-                labelText: 'Selecione um cliente',
-              ),
-            ),
-            if (selectedCustomer != null) ...[
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Nome do Pedido'),
-              ),
-              TextFormField(
-                controller: _priceController,
-                decoration: const InputDecoration(labelText: 'Preço do Pedido'),
-                keyboardType: TextInputType.number,
-              ),
-              TextFormField(
-                controller: _detailsController,
-                decoration:
-                    const InputDecoration(labelText: 'Detalhes do Pedido'),
-                maxLines: null,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Data do Pedido'),
-                readOnly: true,
-                controller: _dateController,
-                onTap: () async {
-                  final selectedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2101),
-                  );
-
-                  if (selectedDate != null) {
-                    final selectedTime = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                    );
-
-                    final selectedDateTime = DateTime(
-                      selectedDate.year,
-                      selectedDate.month,
-                      selectedDate.day,
-                      selectedTime!.hour,
-                      selectedTime.minute,
-                    );
-
+              children: [
+                DropdownButtonFormField<Customer>(
+                  value: selectedCustomer,
+                  onChanged: (customer) {
                     setState(() {
-                      _dateController.text = DateFormat('yyyy-MM-dd HH:mm')
-                          .format(selectedDateTime);
+                      selectedCustomer = customer;
                     });
-                  }
-                },
-              ),
-              DropdownButtonFormField<Employee>(
-                value: selectedEmployee,
-                onChanged: (employee) {
-                  setState(() {
-                    selectedEmployee = employee;
-                  });
-                },
-                items: allEmployees.map((employee) {
-                  return DropdownMenuItem<Employee>(
-                    value: employee,
-                    child: Text(employee.name),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Funcionário',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (selectedCustomer != null && selectedEmployee != null) {
-                    if (_dateController.text.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('Por favor, preencha a data do pedido.'),
-                        ),
-                      );
-                    } else {
-                      final newOrder = Order(
-                        name: _nameController.text,
-                        price: _priceController.text,
-                        details: _detailsController.text,
-                        date: DateTime.parse(_dateController.text),
-                      );
-
-                      selectedCustomer!.orders.add(newOrder);
-                      selectedEmployee!.orders.add(newOrder);
-                      selectedEmployee!.calculateValue();
-                      allOrders.add(newOrder);
-
-                      _nameController.clear();
-                      _priceController.clear();
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Pedido registrado com sucesso!'),
-                        ),
-                      );
-
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ));
-                    }
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue[800],
-                ),
-                child: const Text('Registrar Pedido'),
-              ),
-              const SizedBox(height: 50.0),
-              if (selectedCustomer!.orders.isNotEmpty)
-                Text(
-                  'Pedidos de ${selectedCustomer!.name}:',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0,
+                  },
+                  items: allCustomers.map((customer) {
+                    return DropdownMenuItem<Customer>(
+                      value: customer,
+                      child: Text(customer.name),
+                    );
+                  }).toList(),
+                  decoration: const InputDecoration(
+                    labelText: 'Selecione um cliente',
                   ),
                 ),
-              const SizedBox(height: 20.0),
-              Container(
-                color: Colors.white,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: selectedCustomer!.orders.length,
-                  itemBuilder: (context, index) {
-                    final order = selectedCustomer!.orders[index];
-                    return Container(
-                      margin: const EdgeInsets.all(16.0),
-                      padding: const EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[800],
-                        borderRadius: BorderRadius.circular(8.0),
+                if (selectedCustomer != null) ...[
+                  TextFormField(
+                    controller: _nameController,
+                    decoration:
+                        const InputDecoration(labelText: 'Nome do Pedido'),
+                  ),
+                  TextFormField(
+                    controller: _priceController,
+                    decoration:
+                        const InputDecoration(labelText: 'Preço do Pedido'),
+                    keyboardType: TextInputType.number,
+                  ),
+                  TextFormField(
+                    controller: _detailsController,
+                    decoration:
+                        const InputDecoration(labelText: 'Detalhes do Pedido'),
+                    maxLines: null,
+                  ),
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: 'Data do Pedido'),
+                    readOnly: true,
+                    controller: _dateController,
+                    onTap: () async {
+                      final selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101),
+                      );
+
+                      if (selectedDate != null) {
+                        final selectedTime = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.now(),
+                        );
+
+                        final selectedDateTime = DateTime(
+                          selectedDate.year,
+                          selectedDate.month,
+                          selectedDate.day,
+                          selectedTime!.hour,
+                          selectedTime.minute,
+                        );
+
+                        setState(() {
+                          _dateController.text = DateFormat('yyyy-MM-dd HH:mm')
+                              .format(selectedDateTime);
+                        });
+                      }
+                    },
+                  ),
+                  DropdownButtonFormField<Employee>(
+                    value: selectedEmployee,
+                    onChanged: (employee) {
+                      setState(() {
+                        selectedEmployee = employee;
+                      });
+                    },
+                    items: allEmployees.map((employee) {
+                      return DropdownMenuItem<Employee>(
+                        value: employee,
+                        child: Text(employee.name),
+                      );
+                    }).toList(),
+                    decoration: const InputDecoration(
+                      labelText: 'Funcionário',
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (selectedCustomer != null &&
+                          selectedEmployee != null) {
+                        if (_dateController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Por favor, preencha a data do pedido.'),
+                            ),
+                          );
+                        } else {
+                          final newOrder = Order(
+                            name: _nameController.text,
+                            price: _priceController.text,
+                            details: _detailsController.text,
+                            date: DateTime.parse(_dateController.text),
+                          );
+
+                          selectedCustomer!.orders.add(newOrder);
+                          selectedEmployee!.orders.add(newOrder);
+                          selectedEmployee!.calculateValue();
+                          allOrders.add(newOrder);
+                          waitingOrders.add(newOrder);
+
+                          _nameController.clear();
+                          _priceController.clear();
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Pedido registrado com sucesso!'),
+                            ),
+                          );
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ));
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue[800],
+                    ),
+                    child: const Text('Registrar Pedido'),
+                  ),
+                  const SizedBox(height: 50.0),
+                  if (selectedCustomer!.orders.isNotEmpty)
+                    Text(
+                      'Pedidos de ${selectedCustomer!.name}:',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nome do Pedido: ${order.name}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    ),
+                  const SizedBox(height: 20.0),
+                  Container(
+                    color: Colors.white,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: selectedCustomer!.orders.length,
+                      itemBuilder: (context, index) {
+                        final order = selectedCustomer!.orders[index];
+                        return Container(
+                          margin: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[800],
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Preço do Pedido: R\$${order.price}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Nome do Pedido: ${order.name}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                'Preço do Pedido: R\$${order.price}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                'Detalhes do Pedido: \n${order.details}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Detalhes do Pedido: \n${order.details}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            'Data do Pedido: ${DateFormat('yyyy-MM-dd HH:mm').format(order.date)}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          ],
-        )),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

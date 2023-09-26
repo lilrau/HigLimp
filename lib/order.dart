@@ -41,4 +41,11 @@ class Order {
 
     allOrders.remove(this);
   }
+
+  void completeOrder() {
+    for (final employee in allEmployees) {
+      employee.completedOrders.add(this);
+      employee.calculateValue();
+    }
+  }
 }
