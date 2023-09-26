@@ -1,18 +1,18 @@
-import 'emoticons.dart';
+import '../controllers/emoticons.dart';
 import 'package:flutter/material.dart';
 import 'calendar.dart';
-import 'register.dart';
+import '../controllers/register.dart';
 import 'schedule.dart';
 import 'employees_list.dart';
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'customers_list.dart';
-import 'new_employee.dart';
-import 'confirm.dart';
-import 'new_order.dart';
+import '../controllers/new_employee.dart';
+import '../controllers/confirm.dart';
+import '../controllers/new_order.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();

@@ -1,10 +1,10 @@
 import 'new_employee.dart';
 import 'package:flutter/material.dart';
 import 'register.dart';
-import 'customer.dart';
-import 'order.dart';
-import 'employee.dart';
-import 'home_page.dart';
+import '../models/customer.dart';
+import '../models/order.dart';
+import '../models/employee.dart';
+import '../views/home_page.dart';
 import 'package:intl/intl.dart';
 
 Customer? selectedCustomer;
@@ -67,12 +67,22 @@ class _NewOrderPageState extends State<NewOrderPage> {
                     decoration:
                         const InputDecoration(labelText: 'Preço do Pedido'),
                     keyboardType: TextInputType.number,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira o preço do pedido.';
+                      }
+                      final price = double.tryParse(value);
+                      if (price == null || price <= 0) {
+                        return 'O preço deve ser um valor numérico maior que zero.';
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
                     controller: _detailsController,
                     decoration:
                         const InputDecoration(labelText: 'Detalhes do Pedido'),
-                    maxLines: null,
+                    maxLines: null, // Permite várias linhas para os detalhes
                   ),
                   TextFormField(
                     decoration:

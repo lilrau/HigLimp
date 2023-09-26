@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
-import 'register.dart';
-import 'new_employee.dart';
-import 'new_order.dart';
+import '../controllers/register.dart';
+import '../controllers/new_employee.dart';
+import '../controllers/new_order.dart';
 
 class Order {
   String name;

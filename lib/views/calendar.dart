@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'new_order.dart';
-import 'order.dart';
-import 'orders_list_day.dart';
+import '../controllers/new_order.dart';
+import '../models/order.dart';
+import '../controllers/orders_list_day.dart';
 import 'package:intl/intl.dart';
 
 Map<String, List<Order>> ordersByDate = {};
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({Key? key});
+  const CalendarPage({super.key});
 
   @override
   State<CalendarPage> createState() => _CalendarPageState();

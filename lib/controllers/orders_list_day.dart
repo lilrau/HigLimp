@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'order.dart';
+import '../models/order.dart';
 import 'package:intl/intl.dart';
 
 class OrderListPage extends StatelessWidget {
   final List<Order> orders;
 
-  const OrderListPage(this.orders);
+  const OrderListPage(this.orders, {super.key});
 
   @override
   Widget build(BuildContext context) {

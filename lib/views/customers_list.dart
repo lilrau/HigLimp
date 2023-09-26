@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'customer.dart';
+import '../models/customer.dart';
 import 'package:intl/intl.dart';
 
 class CustomersListPage extends StatefulWidget {

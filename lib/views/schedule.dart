@@ -1,7 +1,7 @@
 import 'home_page.dart';
 import 'package:flutter/material.dart';
-import 'register.dart';
-import 'new_order.dart';
+import '../controllers/register.dart';
+import '../controllers/new_order.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);

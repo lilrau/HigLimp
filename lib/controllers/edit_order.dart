@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'order.dart';
+import '../models/order.dart';
 import 'new_order.dart';
 import 'package:intl/intl.dart';
 import 'register.dart';
@@ -7,14 +7,13 @@ import 'new_employee.dart';
 
 class EditOrderPage extends StatefulWidget {
   final Order order;
-
-  const EditOrderPage({required this.order});
+  const EditOrderPage({super.key, required this.order});
 
   @override
-  _EditOrderPageState createState() => _EditOrderPageState();
+  EditOrderPageState createState() => EditOrderPageState();
 }
 
-class _EditOrderPageState extends State<EditOrderPage> {
+class EditOrderPageState extends State<EditOrderPage> {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
@@ -73,7 +72,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
                       selectedDate.year,
                       selectedDate.month,
                       selectedDate.day,
-                      selectedTime!.hour,
+                      selectedTime!.hour, // NAO esquecer que "!" pois showTimePicker retorna um Future<TimeOfDay?>, que pode ser nulo(espero que nunca seja)
                       selectedTime.minute,
                     );
 
@@ -87,7 +86,7 @@ class _EditOrderPageState extends State<EditOrderPage> {
               ElevatedButton(
                 onPressed: () {
                   final updatedOrder = Order(
-                    name: widget.order.name, // Mantém o mesmo nome
+                    name: widget.order.name, // Mantem o mesmo nome
                     price: _priceController.text,
                     details: _detailsController.text,
                     date: DateTime.parse(_dateController.text),

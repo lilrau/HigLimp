@@ -1,27 +1,29 @@
-import 'package:dispmoveis/home_page.dart';
 import 'package:flutter/material.dart';
-import 'employee.dart';
+import '../models/customer.dart';
+import '../views/schedule.dart';
 
-List<Employee> allEmployees = [];
+List<Customer> allCustomers = [];
 
-class NewEmployeesPage extends StatefulWidget {
-  const NewEmployeesPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<NewEmployeesPage> createState() => _NewEmployeesPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _NewEmployeesPageState extends State<NewEmployeesPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Adicionar funcionários'),
+        title: const Text('Cadastrar cliente'),
         backgroundColor: Colors.blue[800],
       ),
       body: Padding(
@@ -46,6 +48,7 @@ class _NewEmployeesPageState extends State<NewEmployeesPage> {
               TextFormField(
                 controller: _phoneController,
                 decoration: const InputDecoration(labelText: 'Celular'),
+                keyboardType: TextInputType.number,
                 validator: (value) {
                   final phoneRegex = RegExp(r'^\d{10,12}$');
                   if (value == null || value.isEmpty) {
@@ -56,19 +59,47 @@ class _NewEmployeesPageState extends State<NewEmployeesPage> {
                   return null;
                 },
               ),
+              TextFormField(
+                controller: _addressController,
+                decoration: const InputDecoration(labelText: 'Endereço'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o endereço';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  final emailRegex =
+                      RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o email';
+                  } else if (!emailRegex.hasMatch(value)) {
+                    return 'Email não está no formato correto';
+                  }
+                  return null;
+                },
+              ),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    final newEmployee = Employee(
+                    final newCustomer = Customer(
                         name: _nameController.text,
                         phone: _phoneController.text,
+                        address: _addressController.text,
+                        email: _emailController.text,
                         orders: []);
 
-                    allEmployees.add(newEmployee);
+                    allCustomers.add(newCustomer);
 
                     _nameController.clear();
                     _phoneController.clear();
+                    _addressController.clear();
+                    _emailController.clear();
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -77,7 +108,7 @@ class _NewEmployeesPageState extends State<NewEmployeesPage> {
                     );
 
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => const SchedulePage(),
                     ));
                   }
                 },
