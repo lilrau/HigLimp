@@ -1,11 +1,11 @@
 # HigLimp
 
-Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.
+Projeto final da disciplina Programação de Dispositivos Móveis, coordenado pelo professor **Diego Roberto Antunes**.<br>
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/lilrau/HigLimp)
 
 ## 🎓 Alunos responsáveis pelo projeto
 
-**Raul Souza Silva** e **Gabriel Mastre Costa**
+**Raul Souza Silva** e **Gabriel Mastre Costa**<br>
 ![GitHub contributors](https://img.shields.io/github/contributors/lilrau/HigLimp)
 
 ## 🎯Objetivo
