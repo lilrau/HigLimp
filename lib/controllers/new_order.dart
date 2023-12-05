@@ -36,8 +36,8 @@ class _NewOrderPageState extends State<NewOrderPage> {
   }
 
   Future<bool> willRain() async {
-    double lat = -25.0916;
-    double lon = -50.1668;
+    double lat = -17.0332;
+    double lon = -48.2987;
     String apiKey = '022a143d4990bf04d8b79c5e978466bf';
 
     final url = Uri.parse(
@@ -88,12 +88,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   TextFormField(
                     controller: _nameController,
                     decoration:
-                    const InputDecoration(labelText: 'Nome do Pedido'),
+                        const InputDecoration(labelText: 'Nome do Pedido'),
                   ),
                   TextFormField(
                     controller: _priceController,
                     decoration:
-                    const InputDecoration(labelText: 'Preço do Pedido'),
+                        const InputDecoration(labelText: 'Preço do Pedido'),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -109,12 +109,12 @@ class _NewOrderPageState extends State<NewOrderPage> {
                   TextFormField(
                     controller: _detailsController,
                     decoration:
-                    const InputDecoration(labelText: 'Detalhes do Pedido'),
+                        const InputDecoration(labelText: 'Detalhes do Pedido'),
                     maxLines: null, // Permite várias linhas para os detalhes
                   ),
                   TextFormField(
                     decoration:
-                    const InputDecoration(labelText: 'Data do Pedido'),
+                        const InputDecoration(labelText: 'Data do Pedido'),
                     readOnly: true,
                     controller: _dateController,
                     onTap: () async {
@@ -171,7 +171,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content:
-                              Text('Por favor, preencha a data do pedido.'),
+                                  Text('Por favor, preencha a data do pedido.'),
                             ),
                           );
                         } else {
@@ -222,7 +222,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content:
-                                Text('OBS: Previsão de clima inadequedo !'),
+                                    Text('OBS: Previsão de clima inadequedo !'),
                               ),
                             );
 

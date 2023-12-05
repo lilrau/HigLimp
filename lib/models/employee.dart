@@ -34,6 +34,6 @@ class Employee {
       totalValue += orderPrice;
     }
 
-    value = totalValue * 0.10;
+    value = totalValue * 0.05;
   }
 }
