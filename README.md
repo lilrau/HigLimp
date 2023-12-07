@@ -27,6 +27,29 @@ O projeto possui linguagens e tecnologias administradas automaticamente pelo pro
 
 <p align="left"> <a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40"/> </a> <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> </p>
 
+```
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  table_calendar: ^3.0.9
+  video_player: ^2.7.1
+  flutter_launcher_icons: ^0.13.1
+  intl:
+  sqflite:
+  path:
+  url_launcher:
+  permission_handler: ^8.1.4
+  http: ^0.13.3
+
+dev_dependencies:
+  flutter_native_splash: ^2.3.2
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+```
+
 ## 📝 Licença
 
 [![GitHub](https://img.shields.io/github/license/lilrau/HigLimp)](<[MIT](https://choosealicense.com/licenses/mit/)>)
